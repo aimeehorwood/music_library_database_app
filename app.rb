@@ -14,7 +14,12 @@ class Application < Sinatra::Base
     also_reload 'lib/artist_repository'
   end
 
-  post '/albums' do 
+  get'/albums' do
+    repo = AlbumRepository.new
+    repo.all.map {|album| album.title}.join(", ")
+  end
+
+  post '/albums' do
     repo = AlbumRepository.new
     new_album = Album.new
     new_album.title = params[:title]
@@ -23,10 +28,7 @@ class Application < Sinatra::Base
 
     repo.create(new_album)
 
-    
-
-
-
-  end 
+    return ''
+  end
 
 end

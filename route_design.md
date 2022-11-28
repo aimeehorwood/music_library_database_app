@@ -1,5 +1,17 @@
 # POST/albums Route Design Recipe
 
+# Request:
+POST /albums
+
+# With body parameters:
+title=Voyage
+release_year=2022
+artist_id=2
+
+# Expected response (200 OK)
+(No content)
+
+
 
 1. Design the Route Signature
 You'll need to include:
@@ -11,13 +23,16 @@ You'll need to include:
 
 Method: POST
 Path: /albums
-
+Body Parameters:
+title=Voyage
+release_year=2022
+artist_id=2
 
 2. Design the Response
 
 # Create a new album
 Request: POST /albums
-  With body parameters: "title=OK Computer"
+  With body parameters: "title=Voyage, release_year=2022, artist_id=2"
 Response: None (just creates the resource on the server)
 
 
@@ -73,7 +88,6 @@ describe Application do
 
   context "POST /albums" do
     it 'should create a new album' do
-      # Assuming the post with id 1 exists.
       response = get('/posts?id=1')
 
       expect(response.status).to eq(200)
