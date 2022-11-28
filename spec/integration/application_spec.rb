@@ -21,7 +21,7 @@ describe Application do
   end
 
   context "POST/ albums" do
-    it "should create a new album" do
+    it "returns 200 OK with the right content" do
       response = post(
         "/albums",
         title: "Voyage",
@@ -30,7 +30,7 @@ describe Application do
       )
 
       expect(response.status).to eq(200)
-      expect(response.body).to include('')
+      expect(response.body).to eq('')
 
       response = get('/albums')
 
@@ -38,5 +38,35 @@ describe Application do
       expect(response.body).to include('Voyage')
     end
   end
+
+  context "GET/ artists" do
+    it "returns 200 OK with the right content" do
+      response = get('/artists')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to eq("Pixies, ABBA, Taylor Swift, Nina Simone, Kiasmos")
+    end
+  end
+
+
+  context "POST/ artists" do
+    it "returns 200 OK with the right content" do
+      response = post(
+        "/artists",
+        name: "Wild nothing",
+        genre: "Indie"
+      )
+
+      expect(response.status).to eq(200)
+      expect(response.body).to eq('')
+
+      response = get("/artists")
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Wild nothing')
+    end
+  end
+
+
 end
 

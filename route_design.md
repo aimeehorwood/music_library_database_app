@@ -39,41 +39,21 @@ Response: None (just creates the resource on the server)
 3. Write Examples
 Replace these with your own design.
 
-<!-- EXAMPLE -->
-<!-- Response when the post is found: 200 OK -->
-
-<html>
-  <head></head>
-  <body>
-    <h1>Post title</h1>
-    <div>Post content</div>
-  </body>
-</html>
-<!-- EXAMPLE -->
-<!-- Response when the post is not found: 404 Not Found -->
-
-<html>
-  <head></head>
-  <body>
-    <h1>Sorry!</h1>
-    <div>We couldn't find this post. Have a look at the homepage?</div>
-  </body>
-</html>
 
 # Request:
 
-GET /posts?id=1
+POST /albums
 
 # Expected response:
 
 Response for 200 OK
 # Request:
 
-GET /posts?id=276278
+GET /albums
 
 # Expected response:
 
-Response for 404 Not Found
+Response for 200 OK
 
 4. Encode as Tests Examples
 # EXAMPLE
@@ -86,19 +66,32 @@ describe Application do
 
   let(:app) { Application.new }
 
-  context "POST /albums" do
-    it 'should create a new album' do
-      response = get('/posts?id=1')
+  context "GET/ albums" do
+    it "should return the list of albums" do
+      response = get('/albums')
 
       expect(response.status).to eq(200)
-      # expect(response.body).to eq(expected_response)
+      expect(response.body).to eq("Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring")
+
     end
+  end
 
-    it 'returns 404 Not Found' do
-      response = get('/posts?id=276278')
+  context "POST/ albums" do
+    it "should create a new album" do
+      response = post(
+        "/albums",
+        title: "Voyage",
+        release_year: "2022",
+        artist_id: "2"
+      )
 
-      expect(response.status).to eq(404)
-      # expect(response.body).to eq(expected_response)
+      expect(response.status).to eq(200)
+      expect(response.body).to include('')
+
+      response = get('/albums')
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('Voyage')
     end
   end
 end
