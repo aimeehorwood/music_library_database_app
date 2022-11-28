@@ -10,4 +10,21 @@ describe Application do
   # class so our tests work.
   let(:app) { Application.new }
 
+  context "POST/albums" do
+    it "should create a new album" do 
+      response = post(
+        '/albums',
+        title: 'Voyage',
+        release_year: '2022',
+        artist_id: '2'
+      )
+
+      expect(response.status).to eq(200)
+      expect(response.body).to include('')
+
+      response = get('/albums')
+
+      expect(response.body).to include('Voyage')
+    end
+ end
 end
