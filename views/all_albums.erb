@@ -2,11 +2,15 @@
   <head></head>
   <body>
     <h1>Albums</h1>
+  
       <% @albums.each do |album| %>
-        <div>
-          Title: <a href="/albums/<%= album.id %>"> 
-          <%= album.title %></a>
-          Released: <%= album.release_year %>
+        <p><br>
+        Title: <%= album.title %>
+        <br>
+        Released: <%= album.release_year %>
+        <br>
+        <a href="/albums/<%= album.id %>"> 
+          Click for Album Page</a>
         </div>
       <% end %>
   </body>

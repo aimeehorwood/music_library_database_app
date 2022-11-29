@@ -80,7 +80,28 @@ describe Application do
       response = get('/artists')
 
       expect(response.status).to eq(200)
-      expect(response.body).to eq("Pixies, ABBA, Taylor Swift, Nina Simone, Kiasmos")
+      expect(response.body).to include('<h1>Artists</h1>')
+      expect(response.body).to include('Name: Pixies')
+      expect(response.body).to include('Genre: Rock')
+      expect(response.body).to include('Name: ABBA')
+      expect(response.body).to include('Genre: Pop')
+      expect(response.body).to include('Name: Taylor Swift')
+      expect(response.body).to include('Genre: Pop')
+      expect(response.body).to include('Name: Nina Simone')
+      expect(response.body).to include('Genre: Pop')
+      expect(response.body).to include("Kiasmos")
+      expect(response.body).to include('Experimental')
+      
+    end
+  end
+
+  context "GET/artists/:id" do 
+    it "should return info about artist " do 
+      response = get('/artists/3')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1> Taylor Swift </h1>')
+      expect(response.body).to include('Genre: Pop')
+  
     end
   end
 
