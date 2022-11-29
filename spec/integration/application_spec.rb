@@ -12,7 +12,7 @@ describe Application do
 
 
   context "GET/albums/:id" do 
-    it "should return info about album 1" do 
+    it "should return info about album " do 
       response = get('/albums/2')
 
       expect(response.status).to eq(200)
@@ -23,19 +23,38 @@ describe Application do
   end
   
 
-  context "GET/ albums" do
-    it "should return the list of albums" do
+  context 'GET /albums' do
+    it 'should return the list of albums' do
       response = get('/albums')
 
       expect(response.status).to eq(200)
-      expect(response.body).to include('<h1> Albums </h1>')
-      expect(response.body).to include('<div>\n    \n    \n  Title: Surfer Rosa Released: 1988')
-      expect(response.body).to include('Title: Waterloo Released: 1974')
-      expect(response.body).to include('Title: Super Trouper Released: 1980')
-      expect(response.body).to include('Title: Bossanova Released: 1990')
-      expect(response.body).to include('Title: Lover Released: 2019')
-    end
-  end
+      expect(response.body).to include('<h1>Albums</h1>')
+      expect(response.body).to include('Surfer Rosa')
+      expect(response.body).to include('1988')
+      expect(response.body).to include('Waterloo')
+      expect(response.body).to include('1974')
+      expect(response.body).to include('Super Trouper')
+      expect(response.body).to include('1980')
+      expect(response.body).to include('Bossanova')
+      expect(response.body).to include('1990')
+      expect(response.body).to include('Lover')
+      expect(response.body).to include('2019')
+      expect(response.body).to include('Folklore')
+      expect(response.body).to include('2020')
+      expect(response.body).to include('I Put a Spell on You')
+      expect(response.body).to include('1965')
+      expect(response.body).to include('Baltimore')
+      expect(response.body).to include('1978')
+      expect(response.body).to include('Here Comes the Sun')
+      expect(response.body).to include('1971')
+      expect(response.body).to include('Fodder on My Wings')
+      expect(response.body).to include('1982')
+      expect(response.body).to include('Ring Ring')
+      expect(response.body).to include('1973')
+    end  
+  end  
+
+
 
   context "POST/ albums" do
     it "returns 200 OK with the right content" do
