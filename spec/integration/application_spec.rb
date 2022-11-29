@@ -28,8 +28,12 @@ describe Application do
       response = get('/albums')
 
       expect(response.status).to eq(200)
-      expect(response.body).to eq("Surfer Rosa, Waterloo, Super Trouper, Bossanova, Lover, Folklore, I Put a Spell on You, Baltimore, Here Comes the Sun, Fodder on My Wings, Ring Ring")
-
+      expect(response.body).to include('<h1> Albums </h1>')
+      expect(response.body).to include('<div>\n    \n    \n  Title: Surfer Rosa Released: 1988')
+      expect(response.body).to include('Title: Waterloo Released: 1974')
+      expect(response.body).to include('Title: Super Trouper Released: 1980')
+      expect(response.body).to include('Title: Bossanova Released: 1990')
+      expect(response.body).to include('Title: Lover Released: 2019')
     end
   end
 
