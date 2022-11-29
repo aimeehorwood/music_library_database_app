@@ -57,7 +57,18 @@ describe Application do
 
 
   context "POST/ albums" do
-    it "returns 200 OK with the right content" do
+    it 'should validate album 
+    parameters' do 
+      response = post(
+        '/albums',
+      invalid_artist_title: 'SillyTitle',
+      another_invalid_thing:123
+      )
+      expect(response.status).to eq(400)
+    end 
+
+
+    it "should create a new album" do
       response = post(
         "/albums",
         title: "Voyage",
@@ -94,6 +105,21 @@ describe Application do
       
     end
   end
+
+  context 'GET/albums/new' do 
+    it 'should return the form to add a new album' do 
+      response = get('/albums/new')
+      expect(response.status).to eq(200)
+      expect(response.body).to include('<h1> Insert a new album into Music Library </h1>')
+      expect(response.body).to include('<form action="/albums" method="POST">')
+      expect(response.body).to include('<label> Album title </label>')
+      expect(response.body).to include('<label> Album release year </label>')
+      expect(response.body).to include(' <label> Album artist ID </label>')
+      expect(response.body).to include('<input type="submit"/>')
+    end
+  end
+
+
 
   context "GET/artists/:id" do 
     it "should return info about artist " do 
