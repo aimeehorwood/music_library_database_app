@@ -6,6 +6,8 @@ require 'pg'
 # PG library. We'll use it in our project to interact
 # with the database using SQL.
 
+DatabaseConnection.connect
+
 class DatabaseConnection
   # This method connects to PostgreSQL using the 
   # PG gem. We connect to 127.0.0.1, and select
