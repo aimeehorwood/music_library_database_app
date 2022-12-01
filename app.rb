@@ -14,6 +14,10 @@ class Application < Sinatra::Base
     also_reload "lib/artist_repository"
   end
 
+  get "/" do 
+    return "Welcome"
+  end 
+
   get "/albums/new" do
     return erb(:new_album)
   end
